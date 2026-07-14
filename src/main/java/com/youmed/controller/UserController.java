@@ -55,4 +55,11 @@ public class UserController {
     public UserResponse updateMe(Authentication authentication, @RequestBody UpdateUserRequest request) {
         return userService.updateCurrentUser(authentication.getName(), request);
     }
+
+    @PutMapping("/me/password")
+    @PreAuthorize("isAuthenticated()")
+    public org.springframework.http.ResponseEntity<java.util.Map<String, String>> changePassword(Authentication authentication, @RequestBody com.youmed.dto.request.ChangePasswordRequest request) {
+        userService.changePassword(authentication.getName(), request);
+        return org.springframework.http.ResponseEntity.ok(java.util.Collections.singletonMap("message", "Đổi mật khẩu thành công"));
+    }
 }

@@ -19,4 +19,6 @@ public interface UserService {
     com.youmed.dto.response.UserResponse getCurrentUser(String email);
 
     com.youmed.dto.response.UserResponse updateCurrentUser(String email, UpdateUserRequest request);
+
+    void changePassword(String email, com.youmed.dto.request.ChangePasswordRequest request);
 }

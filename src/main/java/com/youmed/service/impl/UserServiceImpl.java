@@ -15,6 +15,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
 
     @Override
     public List<User> getAllUsers() {
@@ -65,6 +66,19 @@ public class UserServiceImpl implements UserService {
         user.setGender(request.getGender());
         user.setDateOfBirth(request.getDateOfBirth());
         return mapToResponse(userRepository.save(user));
+    }
+
+    @Override
+    public void changePassword(String email, com.youmed.dto.request.ChangePasswordRequest request) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new com.youmed.exception.ResourceNotFoundException("User not found"));
+
+        if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("Mật khẩu hiện tại không đúng");
+        }
+
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        userRepository.save(user);
     }
 
     private com.youmed.dto.response.UserResponse mapToResponse(User user) {

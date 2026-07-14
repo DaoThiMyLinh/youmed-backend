@@ -10,4 +10,10 @@ public interface AuthService {
     RegisterResponse register(RegisterRequest request);
 
     LoginResponse login(LoginRequest request);
+
+    LoginResponse verifyOtp(com.youmed.dto.request.VerifyOtpRequest request);
+    
+    void forgotPassword(com.youmed.dto.request.ForgotPasswordRequest request);
+    
+    void resetPassword(com.youmed.dto.request.ResetPasswordRequest request);
 }
