@@ -15,8 +15,8 @@ import java.util.function.Function;
 @Service
 public class JwtServiceImpl implements JwtService {
 
-    private static final String SECRET_KEY =
-            "youmed-secret-key-youmed-secret-key-youmed-secret-key";
+    @org.springframework.beans.factory.annotation.Value("${JWT_SECRET:youmed-secret-key-youmed-secret-key-youmed-secret-key}")
+    private String SECRET_KEY;
 
     private static final long JWT_EXPIRATION = 1000 * 60 * 60 * 24;
 
