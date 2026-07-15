@@ -14,8 +14,7 @@ import java.util.List;
 @Service
 public class EmailServiceImpl implements EmailService {
 
-    @Value("${spring.mail.username:hatuhy28102004@gmail.com}")
-    private String fromEmail;
+    private String fromEmail = "hatuhy28102004@gmail.com";
 
     @Value("${BREVO_API_KEY:}")
     private String brevoApiKey;
